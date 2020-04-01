@@ -40,7 +40,7 @@ router.post("/", (request, response, next) => {
   );
 });
 
-router.put("/:id", (request, response, next) => {
+router.patch('/:id', (request, response, next) => {
   const { id } = request.params;
 
   const {
@@ -51,7 +51,7 @@ router.put("/:id", (request, response, next) => {
     email_address
   } = request.body;
 
-  const keys = [first_name, last_name, user_name, password, email_address];
+  const keys = ['first_name', 'last_name', 'user_name', 'password', 'email_address'];
 
   const fields = [];
 
@@ -61,14 +61,14 @@ router.put("/:id", (request, response, next) => {
 
   fields.forEach((field, index) => {
     pool.query(
-      "UPDATE users SET ${field}=($1) WHERE id=($2)",
+      `UPDATE users SET ${field}=($1) WHERE id=($2)`,
       [request.body[field], id],
       (err, res) => {
         if (err) return next(err);
 
         if (index === fields.length - 1) response.redirect("/users");
       }
-    );
+    )
   });
 });
 
