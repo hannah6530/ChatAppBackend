@@ -1,8 +1,11 @@
 const { Router } = require("express");
 
+
 const pool = require("../db");
 
 const router = Router();
+
+
 
 router.get("/", (request, response, next) => {
   pool.query("SELECT * FROM users ORDER BY id ASC", (err, res) => {
@@ -69,6 +72,16 @@ router.patch('/:id', (request, response, next) => {
         if (index === fields.length - 1) response.redirect("/users");
       }
     )
+  });
+});
+router.delete('/:id', (request, response, next) => {
+  const { id } = request.params;
+
+  pool.query('DELETE FROM users WHERE id=($1)', [id], (err, res) => {
+    if(err) return next(err);
+
+    response.redirect('/users');
+
   });
 });
 
