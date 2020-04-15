@@ -1,11 +1,11 @@
 const { Router } = require("express");
 
-
 const pool = require("../db");
 
 const router = Router();
 
-
+// const usersController = require('../controllers/userscontroller');
+// router.get("/", usersController.getUsers);
 
 router.get("/", (request, response, next) => {
   pool.query("SELECT * FROM users ORDER BY id ASC", (err, res) => {
