@@ -1,3 +1,12 @@
+//request = represents any data sent by the user to the api
+//response = allows us to respond to the user with specific data
+//send = sends back the data as a result of the request
+// ./ =  current directory
+// module.exports = exposes whatever you want as a module itself which allows other files to require and work with it
+// body parser takes care of setting up middleware in express
+// middleware allows us to parse json data
+// "find" returns a reference, not the original
+
 const { Router } = require("express");
 
 const pool = require("../db");
@@ -9,9 +18,10 @@ const router = Router();
 
 router.get("/", (request, response, next) => {
   pool.query("SELECT * FROM users ORDER BY id ASC", (err, res) => {
-    if (err) return next(err);
-
-    response.json(res.rows);
+    if (err) return next(err); //next(err) passes error to error handler
+    // next = handles setting data around through middleware
+    response.json(res.rows); // res.rows gives you shorter amount of data instead of using only res
+    //response.json renders the rows
   });
 });
 

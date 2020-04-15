@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+// tells the computer that a node executable is being created (code above)
+// #! = shebang, which is used to tell out platform where to find the specific way to interpret are executable
+
+// takes care of starting up the application
+
 const app = require('../app');
 const port = 3002;
 
